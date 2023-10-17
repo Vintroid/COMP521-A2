@@ -92,7 +92,7 @@ public class EyeMovement : MonoBehaviour
         eye_angle = random_angle * Mathf.Deg2Rad;
 
         // Velocity in the negative direction
-        eye_speed = UnityEngine.Random.Range(15f, 20f);
+        eye_speed = UnityEngine.Random.Range(14f, 20f);
         float x_vel = (float)(eye_speed * Math.Cos(eye_angle));
         float y_vel = (float)(eye_speed * Mathf.Sin(eye_angle));
         eye_velocity = new Vector2(x_vel, y_vel);
@@ -107,7 +107,9 @@ public class EyeMovement : MonoBehaviour
         // Hitting the peak
         if(hit.transform.position.x == 0f && hit.transform.position.y == -3.5f)
         {
-            eye_velocity *= hit.normal;
+            Vector2 old_velocity = eye_velocity;
+            eye_velocity = new Vector2(-old_velocity.x,-old_velocity.y);
+            eye.transform.position += new Vector3(0f, 0.2f, 0f); // boost to bounce better
         }
 
         // Hitting the ponds
@@ -120,7 +122,10 @@ public class EyeMovement : MonoBehaviour
         else
         {
             Vector2 old_velocity = eye_velocity;
-            eye_velocity = new Vector2(old_velocity.x, -old_velocity.y); ;
+
+            // reversing the y-velocity
+            eye_velocity = new Vector2(old_velocity.x, -old_velocity.y);
+            eye.transform.position += new Vector3(0f, 0.2f, 0f); // Boost to bounce btter
             
         }
         

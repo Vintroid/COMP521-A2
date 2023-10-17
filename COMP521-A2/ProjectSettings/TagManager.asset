@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Blue
+  - Red
+  - Searching
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - Ground
   - Pond
   - Background
-  - 
-  - 
+  - Searching
+  - Fish
   - 
   - 
   - 
@@ -44,9 +47,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 1631464551
-    locked: 0
   - name: Pond
     uniqueID: 2235143305
+    locked: 0
+  - name: Searching
+    uniqueID: 3522416245
+    locked: 0
+  - name: Fish
+    uniqueID: 3216192715
+    locked: 0
+  - name: Ground
+    uniqueID: 1631464551
     locked: 0

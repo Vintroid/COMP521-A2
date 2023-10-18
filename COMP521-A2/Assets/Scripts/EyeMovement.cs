@@ -6,14 +6,14 @@ using UnityEngine;
 public class EyeMovement : MonoBehaviour
 {
     [SerializeField] GameObject eye;
+    [SerializeField] Verlets verlets;
 
     // Movement variables
-    private float time = 0f;
-    private float eye_speed;
-    private Vector2 eye_velocity;
-    private float eye_acceleration = -9.81f;
-    private float eye_angle;
-    Quaternion eye_rotation = Quaternion.identity;
+    public float time = 0f;
+    public float eye_speed;
+    public Vector2 eye_velocity;
+    public float eye_acceleration = -9.81f;
+    public float eye_angle;
 
 
     // Start is called before the first frame update
@@ -30,14 +30,13 @@ public class EyeMovement : MonoBehaviour
             // On fish creation, set movement in the negative dir
             SetRedMovement(eye);
         }
-
-        // Destroys fish eye after 5 seconds
-        Destroy(eye, 5f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Checking if time elapsed
+        CheckFishTime();
         // Moving fish physics
         MoveFishEye(eye);
         // Checking boundaries
@@ -45,6 +44,15 @@ public class EyeMovement : MonoBehaviour
 
         time = Time.deltaTime;
         
+    }
+
+    private void CheckFishTime()
+    {
+        if(time > 5.0f)
+        {
+            verlets.CleanUpFish();
+            Destroy(eye);
+        }
     }
 
     // Moving the fish using projectile motion equations
@@ -57,6 +65,10 @@ public class EyeMovement : MonoBehaviour
         float delta_x = eye_velocity.x * (Time.deltaTime);
         float delta_y = eye_velocity.y * (Time.deltaTime) + 0.5f * eye_acceleration * (Time.deltaTime);
         eye.transform.position += new Vector3(delta_x, delta_y , 0f);
+
+        // Updating angle of the fish for realism
+        float deg_angle = Vector2.Angle(Vector2.right, eye_velocity);
+        eye_angle = deg_angle * Mathf.Deg2Rad;
     }
 
     // Function to check if the fish is out of scene bounds
@@ -64,11 +76,13 @@ public class EyeMovement : MonoBehaviour
     {
         if(eye.transform.position.x > 13 || eye.transform.position.x < -13)
         {
+            verlets.CleanUpFish();
             Destroy(eye);
         }
 
         if(eye.transform.position.y > 6 || eye.transform.position.y < -6)
         {
+            verlets.CleanUpFish();
             Destroy(eye);
         }
     }
@@ -101,11 +115,10 @@ public class EyeMovement : MonoBehaviour
 
     public void CollisionMovement(GameObject eye, RaycastHit2D hit)
     {
-        // Since colliders cannot be used for collision handling, static x,y coordinates
-        // will be used.
+        // Since colliders cannot be used for collision handling, tags will be used.
 
         // Hitting the peak
-        if(hit.transform.position.x == 0f && hit.transform.position.y == -3.5f)
+        if(hit.transform.tag == "Peak")
         {
             Vector2 old_velocity = eye_velocity;
             eye_velocity = new Vector2(-old_velocity.x,-old_velocity.y);
@@ -113,20 +126,41 @@ public class EyeMovement : MonoBehaviour
         }
 
         // Hitting the ponds
-        else if(hit.transform.position.y == -4.7f)
-        {
+        else if(hit.transform.tag == "Pond")
+        {   
+            verlets.CleanUpFish();
             Destroy(eye);
         }
 
         // Hitting ground or other fishes
-        else
+        else if(hit.transform.tag == "Ground")
         {
+            Vector2 old_velocity = eye_velocity;
+              
+            // reversing the y-velocity
+            eye_velocity = new Vector2(old_velocity.x, -old_velocity.y);
+            eye.transform.position += new Vector3(0f, 0.2f, 0f); // Boost to bounce better
+        }
+
+        else if(hit.transform.tag == "Blue" || hit.transform.tag == "Red")
+        {
+            // Fishes interacting
             Vector2 old_velocity = eye_velocity;
 
             // reversing the y-velocity
-            eye_velocity = new Vector2(old_velocity.x, -old_velocity.y);
-            eye.transform.position += new Vector3(0f, 0.2f, 0f); // Boost to bounce btter
-            
+            eye_velocity = new Vector2(-old_velocity.x, -old_velocity.y);
+
+            // For more realistic fish collisions
+            if(eye.transform.position.y >= hit.transform.position.y)
+            {
+                eye.transform.position += new Vector3(0f, 0.2f, 0f); // Bouncing on other fish
+            }
+            else
+            {
+                eye.transform.position += new Vector3(0f, -0.2f, 0f); // Getting bounced on
+            }
+                
+                    
         }
         
     }

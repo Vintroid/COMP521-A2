@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1759643914306007746}
   - component: {fileID: -686531079761853400}
   - component: {fileID: -5848479499405620024}
+  - component: {fileID: 3754888378023623780}
   m_Layer: 10
   m_Name: Blue Eye
   m_TagString: Blue
@@ -100,6 +101,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eye: {fileID: 4877103403581483816}
+  verlets: {fileID: 3754888378023623780}
+  time: 0
+  eye_speed: 0
+  eye_velocity: {x: 0, y: 0}
+  eye_acceleration: -9.81
+  eye_angle: 0
+  eye_rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &-686531079761853400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +139,39 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &3754888378023623780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877103403581483816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0cdd60fc0c5b548b3be5d6eaf9f6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eye: {fileID: 4877103403581483816}
+  eyeMovement: {fileID: -1759643914306007746}
+  pointObject: {fileID: 4877103403581483816, guid: b026f3cb46273cd409a46bb27b831c5f, type: 3}
+  lineObject: {fileID: 2176376649834807839, guid: b44e8d4fe9c6741428aa8233c5ec4442, type: 3}
+  pointObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lineObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -7,6 +7,9 @@ TagManager:
   - Blue
   - Red
   - Searching
+  - Ground
+  - Pond
+  - Peak
   layers:
   - Default
   - TransparentFX

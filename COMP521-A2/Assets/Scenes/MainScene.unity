@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 1527942918}
   m_Layer: 7
   m_Name: Blue water
-  m_TagString: Untagged
+  m_TagString: Pond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 1613336886}
   m_Layer: 6
   m_Name: GroundLevel
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -760,7 +760,7 @@ GameObject:
   - component: {fileID: 1624900348}
   m_Layer: 6
   m_Name: Peak
-  m_TagString: Untagged
+  m_TagString: Peak
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 1946460569}
   m_Layer: 7
   m_Name: Red water
-  m_TagString: Untagged
+  m_TagString: Pond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

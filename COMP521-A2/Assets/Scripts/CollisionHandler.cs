@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +27,11 @@ public class CollisionHandler : MonoBehaviour
     // Checking if collision is occuring using circle raycast
     private bool IsColliding()
     {
+        eye.GetComponent<Collider2D>().enabled = false; // Turning off own collider for hit detection
+                                                       // Otherwise, would always hit itself
+
         hit = Physics2D.CircleCast(new Vector2(eye.transform.position.x, eye.transform.position.y), eye_radius, Vector2.zero);
+        eye.GetComponent <Collider2D>().enabled = true;
         
         if(hit)
         {

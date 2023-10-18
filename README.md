@@ -2,7 +2,7 @@
 
 Vincent St-Pierre ID: 260986454<br>
 Note: I am using colliders for raycast purposes only. They are not<br>
-being used for collision detection or resolution.<br>
+being used for their components.<br>
 
 Verlet Constraints:<br>
 Verlets have an offset from the eye given on initialization.<br>
